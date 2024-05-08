@@ -25,6 +25,8 @@ function init() {
     initTeamsDropdown();
     const describeTeamBtn = document.getElementById("describeTeamBtn");
     describeTeamBtn.onclick = describeTeam;
+    const teamList = document.getElementById("playerList");
+    teamList.onchange = emptyString;
 }
 function initTeamsDropdown() {
     const teamList = document.getElementById("playerList");
@@ -32,11 +34,28 @@ function initTeamsDropdown() {
         let teamOption = new Option(teams[i].name, teams[i].teamcode);
         teamList.appendChild(teamOption);
     }
+    let noneOption = new Option("Select a team","SEL");
+    teamList.appendChild(noneOption);
+    teamList.value = "SEL";
 }
 
 function describeTeam(){
     const describeTeamDiv = document.getElementById("describeTeamDiv");
     const teamList = document.getElementById("playerList");
     let teamIndex = teamList.selectedIndex;
-    describeTeamDiv.innerHTML = "You selected the "+teams[teamIndex].name+" ("+teams[teamIndex].teamcode+") who play in "+ teams[teamIndex].locatedIn
+    if (teamIndex == 4){
+        describeTeamDiv.innerHTML = ""
+    }
+    else{
+        describeTeamDiv.innerHTML = "You selected the "+teams[teamIndex].name+" ("+teams[teamIndex].teamcode+") who play in "+ teams[teamIndex].locatedIn
+    }
+}
+
+function emptyString(){
+    const teamList = document.getElementById("playerList");
+    let selectedValue = teamList.value;
+    if (selectedValue == "SEL"){
+        const describeTeamDiv = document.getElementById("describeTeamDiv");
+        describeTeamDiv.innerHTML = ""
+    }
 }
