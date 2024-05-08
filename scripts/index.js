@@ -19,13 +19,24 @@ let teams = [
     }
   ];
 
-  window.onload = function() {
+window.onload = init;
+  
+function init() {
     initTeamsDropdown();
-  }
-  function initTeamsDropdown() {
-    const teamList = document.getElementById("playerList")
+    const describeTeamBtn = document.getElementById("describeTeamBtn");
+    describeTeamBtn.onclick = describeTeam;
+}
+function initTeamsDropdown() {
+    const teamList = document.getElementById("playerList");
     for (let i=0;i<teams.length;i++){
         let teamOption = new Option(teams[i].name, teams[i].teamcode);
         teamList.appendChild(teamOption);
     }
-  }
+}
+
+function describeTeam(){
+    const describeTeamDiv = document.getElementById("describeTeamDiv");
+    const teamList = document.getElementById("playerList");
+    let teamIndex = teamList.selectedIndex;
+    describeTeamDiv.innerHTML = "You selected the "+teams[teamIndex].name+" ("+teams[teamIndex].teamcode+") who play in "+ teams[teamIndex].locatedIn
+}
